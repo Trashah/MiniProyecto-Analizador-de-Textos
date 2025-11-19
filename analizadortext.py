@@ -51,7 +51,9 @@ def analizar_texto(texto):
             resultado += f"- {palabra}: (no se encontraron sinónimos)\n"
     resultado += "\n"
 
-#Reconocimiento de Entidades Nombradas (NER)
+    # ... (previous code)
+
+    #Reconocimiento de Entidades Nombradas (NER)
     tokens_origen = word_tokenize(texto, language="spanish") #se agregó el idioma a español
     etiquetas = pos_tag(tokens_origen)     # Primero, se etiqueta cada palabra con su categoría gramatical (nombre, verbo, adjetivo, etc.)
     arbol_entidades = ne_chunk(etiquetas) #agrupa las palabras con su categoría gramatical
@@ -60,8 +62,51 @@ def analizar_texto(texto):
         if hasattr(subtree, "label"):
             entidad = " ".join(c[0] for c in subtree.leaves())
             resultado += f"{subtree.label()}: {entidad}\n"
+    resultado += "\n"
 
+    # --- SISTEMA EXPERTO: Clasificación de Tema ---
+    resultado += sistema_experto_clasificacion(tokens_limpios)
+    
     return resultado
+
+
+def sistema_experto_clasificacion(tokens):
+    """
+    Sistema experto simple basado en reglas para clasificar el tema del texto.
+    Base de conocimiento: Diccionario de palabras clave.
+    Motor de inferencia: Conteo de coincidencias y selección de máximo.
+    """
+    # Base de conocimiento
+    base_conocimiento = {
+        "Tecnología": ["computadora", "software", "hardware", "inteligencia", "artificial", "internet", "redes", "algoritmo", "datos", "programación", "código", "app", "digital", "robot", "cibernético"],
+        "Ciencia": ["física", "química", "biología", "espacio", "teoría", "experimento", "científico", "átomo", "molécula", "energía", "célula", "astronomía", "genética"],
+        "Deportes": ["fútbol", "baloncesto", "tenis", "gol", "partido", "jugador", "equipo", "torneo", "campeonato", "medalla", "olímpico", "entrenador", "atleta", "carrera"],
+        "Política": ["gobierno", "ley", "elecciones", "presidente", "ministro", "democracia", "voto", "parlamento", "política", "nación", "estado", "candidato", "partido"],
+        "Arte/Cultura": ["música", "pintura", "cine", "literatura", "poesía", "escultura", "artista", "obra", "museo", "concierto", "teatro", "novela", "autor"]
+    }
+
+    # Motor de inferencia
+    puntuaciones = {tema: 0 for tema in base_conocimiento}
+    
+    for token in tokens:
+        for tema, palabras_clave in base_conocimiento.items():
+            if token in palabras_clave:
+                puntuaciones[tema] += 1
+
+    # Reglas de decisión
+    tema_detectado = "General / No identificado"
+    max_puntos = 0
+    
+    for tema, puntos in puntuaciones.items():
+        if puntos > max_puntos:
+            max_puntos = puntos
+            tema_detectado = tema
+            
+    # Umbral mínimo
+    if max_puntos < 1:
+        tema_detectado = "General / No identificado"
+
+    return f"📌 Clasificación de Tema (Sistema Experto): {tema_detectado} (Coincidencias: {max_puntos})\n"
 
 
 #Función para botón "Analizar"
