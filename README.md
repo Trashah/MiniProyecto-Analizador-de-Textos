@@ -37,31 +37,25 @@ cd MiniProyecto-Analizador-deTextos
 
 Si ya tienes abierto VS CODE o algún otro editor o IDE, abre una terminal integrada para continuar; si no continua en la misma terminal de hace rato.
 
-Ejecuta la aplicación de python desde el buscador de aplicaciones de windows o ejecutalo desde la términal, ejecutado python escribirás el siguiente comando:
+### Paso 1: Instalar librerías
+Ejecuta el siguiente comando para instalar todas las dependencias necesarias (NLTK, Scikit-learn, Numpy, etc.):
 
 ```bash
-import nltk; nltk.download() 
+pip install -r requerimientos.txt
 ```
-Se abrirá un instalador gráfico en donde puesdes escoger paquetes especificos, sin embargo, en esta ocasión instalaremos todoo, presionaremos "All" y después en download.
 
-Ahora debes estar en la carpeta `MiniProyecto-Analizador-deTextos`. Ejecuta el siguiente comando desde una terminal de visual studio para instalar todas lo necesario para que funcione el proyecto.
+### Paso 2: Descargar datos de NLTK
+Hemos creado un script para facilitar la descarga de los diccionarios y modelos necesarios. Ejecuta:
 
 ```bash
-pip install numpy
+python instalar_datos_nltk.py
 ```
-Numpy es necesario para colaborar con NLTK.
 
-También necesitará tkinter, pero este ya debería venir por defecto con python.
-
-Este último paso es importante; si no se hace tendrás un montón de errores y no podrás hacer nada.
-
+Esto descargará automáticamente todo lo necesario para que el analizador funcione correctamente.
 
 ## USO DEL TEST
-Para hacer uso del test basta con instalar primero la librería scikit-learn, para esto escribe el siguiente comando en la terminal estando en la ruta del proyecto
-```bash
-pip install scikit-learn
-```
-Una vez teneindo la librería instalada solo ejecuta el test con el siguiente comando
+Como ya instalaste las dependencias en el paso anterior (incluyendo `scikit-learn`), para ejecutar las pruebas solo necesitas correr:
+
 ```bash
 python testapp.py
 ```

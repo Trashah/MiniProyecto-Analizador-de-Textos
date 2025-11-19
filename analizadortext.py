@@ -81,8 +81,8 @@ def sistema_experto_clasificacion(tokens):
         "Tecnología": ["computadora", "software", "hardware", "inteligencia", "artificial", "internet", "redes", "algoritmo", "datos", "programación", "código", "app", "digital", "robot", "cibernético"],
         "Ciencia": ["física", "química", "biología", "espacio", "teoría", "experimento", "científico", "átomo", "molécula", "energía", "célula", "astronomía", "genética"],
         "Deportes": ["fútbol", "baloncesto", "tenis", "gol", "partido", "jugador", "equipo", "torneo", "campeonato", "medalla", "olímpico", "entrenador", "atleta", "carrera"],
-        "Política": ["gobierno", "ley", "elecciones", "presidente", "ministro", "democracia", "voto", "parlamento", "política", "nación", "estado", "candidato", "partido"],
-        "Arte/Cultura": ["música", "pintura", "cine", "literatura", "poesía", "escultura", "artista", "obra", "museo", "concierto", "teatro", "novela", "autor"]
+        "Política": ["gobierno", "ley", "elecciones", "presidente", "ministro", "democracia", "voto", "parlamento", "política", "nación", "naciones", "estado", "candidato", "partido", "organización", "unidas"],
+        "Arte/Cultura": ["música", "pintura", "cine", "literatura", "poesía", "escultura", "artista", "obra", "museo", "concierto", "teatro", "novela", "autor", "escritor", "libro", "escribió"]
     }
 
     # Motor de inferencia
