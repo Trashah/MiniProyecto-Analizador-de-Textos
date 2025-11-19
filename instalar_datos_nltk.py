@@ -5,8 +5,10 @@ def download_nltk_data():
     
     packages = [
         'punkt',
+        'punkt_tab',
         'stopwords',
         'averaged_perceptron_tagger',
+        'averaged_perceptron_tagger_eng',
         'maxent_ne_chunker',
         'words',
         'wordnet',
